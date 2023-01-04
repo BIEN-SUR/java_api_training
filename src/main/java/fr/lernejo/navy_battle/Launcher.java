@@ -1,7 +1,6 @@
 package fr.lernejo.navy_battle;
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 
 public class Launcher
 {
@@ -13,7 +12,7 @@ public class Launcher
                 throw new IllegalArgumentException("Port should be positive");
             }
             System.out.println("Starting server on port " + args[0] + "...");
-            HttpServer server = PingHandler.createAndStartServer(port);
+            HttpServer server = HttpServerUtil.createAndStartServer(port);
         }
         else {
             throw new IllegalArgumentException("Please provide a port");
