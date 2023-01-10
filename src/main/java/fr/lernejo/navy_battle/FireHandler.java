@@ -43,26 +43,15 @@ public class FireHandler implements HttpHandler {
     }
 
     private static Map<String, Object> handleFireRequest(String cell) {
-        // Récupère les coordonnées de la case ciblée
         int row = getRow(cell);
         int col = getColumn(cell);
-        // Vérifie si la case a déjà été touchée
         if (gameGrid[row][col]) return createResponse("miss", true);
-        // Marque la case comme touchée
         gameGrid[row][col] = true;
-
-        // Vérifie si un bateau est touché
         for (Ship ship : ships) {
             if (ship.isHit(row, col)) {
-                // Un bateau a été touché, vérifie si le bateau est coulé
-                if (ship.isSunk()) {
-                    return createResponse("sunk", true);
-                } else {
-                    return createResponse("hit", true);
+                    System.out.println("dinguerie");
                 }
             }
-        }
-        // Aucun bateau n'a été touché
         return createResponse("miss", true);
     }
 

@@ -4,11 +4,11 @@ import java.util.List;
 public class Ship {
     private final int size;
     private final List<String> cells;
-    private boolean sunk;
+    //private boolean sunk;
     public Ship(int size, List<String> cells) {
         this.size = size;
         this.cells = cells;
-        this.sunk = false;
+        //this.sunk = false;
     }
 
     public int getSize() {
@@ -24,11 +24,11 @@ public class Ship {
     }
 
 
-    public boolean isSunk() {
-        return sunk;
-    }
+    //public boolean isSunk() {
+        //return sunk;
+    //}
 
-    public void setSunk(boolean sunk) {
-        this.sunk = sunk;
-    }
+    //public void setSunk(boolean sunk) {
+        //this.sunk = sunk;
+    //}
 }
