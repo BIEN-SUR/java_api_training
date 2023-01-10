@@ -9,16 +9,6 @@ import static fr.lernejo.navy_battle.Utils.createResponse;
 import static fr.lernejo.navy_battle.Utils.sendResponse;
 
 public class FireHandler implements HttpHandler {
-    private static boolean[][] gameGrid;
-    private static List<Ship> ships;
-    
-    public static void setGameGrid(boolean[][] gameGrid) {
-        FireHandler.gameGrid = gameGrid;
-    }
-
-    public static void setShips(List<Ship> ships) {
-        FireHandler.ships = ships;
-    }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -45,13 +35,6 @@ public class FireHandler implements HttpHandler {
     private static Map<String, Object> handleFireRequest(String cell) {
         int row = getRow(cell);
         int col = getColumn(cell);
-        if (gameGrid[row][col]) return createResponse("miss", true);
-        gameGrid[row][col] = true;
-        for (Ship ship : ships) {
-            if (ship.isHit(row, col)) {
-                    System.out.println("dinguerie");
-                }
-            }
         return createResponse("miss", true);
     }
 
