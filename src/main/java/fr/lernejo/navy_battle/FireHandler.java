@@ -13,7 +13,7 @@ public class FireHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if (!"GET".equals(exchange.getRequestMethod())) {
-            sendResponse(exchange, 400, "Bad request method");
+            Utils.sendResponse(exchange, 400, "Bad request method");
             return;
         }
 
@@ -37,8 +37,6 @@ public class FireHandler implements HttpHandler {
         int col = getColumn(cell);
         return createResponse("miss", true);
     }
-
-
 
 
     private static int getRow(String cell) {

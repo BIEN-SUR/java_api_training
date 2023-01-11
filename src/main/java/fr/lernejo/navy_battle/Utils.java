@@ -1,5 +1,7 @@
 package fr.lernejo.navy_battle;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
@@ -16,13 +18,19 @@ public class Utils {
         return response;
     }
 
-    static void sendResponse(HttpExchange exchange, int statusCode, Object response) throws IOException {
-        byte[] responseBytes = response.toString().getBytes();
+    static void sendResponse(HttpExchange exchange, int statusCode, Object responseBody) throws IOException {
+        byte[] responseBytes = toJson(responseBody).getBytes();
         exchange.sendResponseHeaders(statusCode, responseBytes.length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(responseBytes);
-        os.close();
+        exchange.getResponseHeaders().add("Content-Type", "application/json");
+        exchange.getResponseBody().write(responseBytes);
+        exchange.close();
     }
+
+    private static String toJson(Object obj) throws JsonProcessingException, JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(obj);
+    }
+
 
 
 }
