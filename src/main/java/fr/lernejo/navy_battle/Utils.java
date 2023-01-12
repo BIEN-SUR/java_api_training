@@ -19,11 +19,14 @@ public class Utils {
     }
 
     static void sendResponse(HttpExchange exchange, int statusCode, Object responseBody) throws IOException {
-        byte[] responseBytes = toJson(responseBody).getBytes();
-        exchange.sendResponseHeaders(statusCode, responseBytes.length);
-        exchange.getResponseHeaders().add("Content-Type", "application/json");
-        exchange.getResponseBody().write(responseBytes);
-        exchange.close();
+        try (exchange) {
+            byte[] responseBytes = toJson(responseBody).getBytes();
+            exchange.sendResponseHeaders(statusCode, responseBytes.length);
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+            exchange.getResponseBody().write(responseBytes);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
     private static String toJson(Object obj) throws JsonProcessingException, JsonProcessingException {
