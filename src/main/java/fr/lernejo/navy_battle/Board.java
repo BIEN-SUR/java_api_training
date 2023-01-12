@@ -1,19 +1,50 @@
 package fr.lernejo.navy_battle;
 
-public class Board {
-    private final boolean[][] gameGrid;
-    private final int size;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-    public Board(int size) {
-        this.size = size;
-        this.gameGrid = new boolean[size][size];
+class Board {
+    enum State {FREE, FIRED, HIT}
+    enum FireResult {MISS, HIT, SUNK}
+
+    private final State[][] cells = new State[10][10];
+    private final List<Ship> ships = new ArrayList<>();
+
+    Board() {
+        for (State[] row : cells) {
+            Arrays.fill(row, State.FREE);
+        }
+        ships.add(new Ship(0, 0, 5, Ship.Orientation.VERTICAL));
+        ships.add(new Ship(6, 9, 4, Ship.Orientation.HORIZONTAL));
+        ships.add(new Ship(3,5, 3, Ship.Orientation.HORIZONTAL));
+        ships.add(new Ship(6, 6, 3, Ship.Orientation.VERTICAL));
+        ships.add(new Ship(1, 1, 2, Ship.Orientation.VERTICAL));
     }
 
-    public boolean[][] getGameGrid() {
-        return gameGrid;
+    FireResult takeFireFromEnemy(BoardPosition p) {
+        for (Ship s : ships) {
+            if (s.shootAtShip(p)) {
+                if (s.isShipSunk()) {
+                    ships.remove(s);
+                    return FireResult.SUNK;
+                }
+                return FireResult.HIT;
+            }
+        }
+        return FireResult.MISS;
     }
 
-    public int getSize() {
-        return size;
+    boolean shipLeft() {
+        return !ships.isEmpty();
+    }
+
+    void updateCell(int x, int y, boolean enemy) {
+        cells[x][y] = enemy ? State.HIT : State.FIRED;
+    }
+
+    State getCellState(int x, int y) {
+        return cells[x][y];
     }
 }
+

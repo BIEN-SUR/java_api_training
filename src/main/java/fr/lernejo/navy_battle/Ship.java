@@ -1,34 +1,32 @@
 package fr.lernejo.navy_battle;
 import java.util.List;
 
+import java.util.ArrayList;
+
 public class Ship {
-    private final int size;
-    private final List<String> cells;
-    //private boolean sunk;
-    public Ship(int size, List<String> cells) {
-        this.size = size;
-        this.cells = cells;
-        //this.sunk = false;
+    enum Orientation {VERTICAL, HORIZONTAL}
+    private final List<BoardPosition> occupied = new ArrayList<>();
+
+    public Ship(int x, int y, int size, Orientation o) {
+        for (int i = 0; i < size; i++) {
+            if (o == Orientation.HORIZONTAL) {
+                this.occupied.add(new BoardPosition(x + i, y));
+            }
+            else {
+                this.occupied.add(new BoardPosition(x, y + i));
+            }
+        }
     }
 
-    public int getSize() {
-        return size;
+    public boolean shootAtShip(BoardPosition b) {
+        if (this.occupied.contains(b)) {
+            this.occupied.remove(b);
+            return true;
+        }
+        return false;
     }
 
-    public List<String> getCells() {
-        return cells;
+    public boolean isShipSunk() {
+        return this.occupied.isEmpty();
     }
-
-    public boolean isHit(int row, int col) {
-        return cells.contains(String.format("%d-%d", row, col));
-    }
-
-
-    //public boolean isSunk() {
-        //return sunk;
-    //}
-
-    //public void setSunk(boolean sunk) {
-        //this.sunk = sunk;
-    //}
 }
