@@ -17,7 +17,9 @@ public class Launcher
             String serverUrl = args[1];
             Server.start(port);
             Client.post(serverUrl, port,"Test message");
-        }
-        else System.out.println("Invalid arguments");
+            Game game = new Game(new Json("1", serverUrl, "Test message"), new Json("2", "http://localhost:" + port, "Test message"));
+        } else System.out.println("Invalid arguments");
     }
+
+
 }

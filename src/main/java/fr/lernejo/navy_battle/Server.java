@@ -1,6 +1,5 @@
 package fr.lernejo.navy_battle;
 import com.sun.net.httpserver.HttpServer;
-import fr.lernejo.navy_battle.FireApi.FireHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

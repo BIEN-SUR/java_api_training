@@ -1,4 +1,4 @@
-package fr.lernejo.navy_battle.FireApi;
+package fr.lernejo.navy_battle;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class FireHandler implements HttpHandler {
-
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         int code = 400;
