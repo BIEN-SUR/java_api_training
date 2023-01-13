@@ -18,7 +18,7 @@ public class Utils {
         return response;
     }
 
-    static void sendResponse(HttpExchange exchange, int statusCode, Object responseBody) throws IOException {
+    public static void sendResponse(HttpExchange exchange, int statusCode, Object responseBody) throws IOException {
         try (exchange) {
             byte[] responseBytes = toJson(responseBody).getBytes();
             exchange.sendResponseHeaders(statusCode, responseBytes.length);
