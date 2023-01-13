@@ -17,7 +17,7 @@ public class Launcher
             String serverUrl = args[1];
             Server.start(port);
             Client.post(serverUrl, port,"Test message");
-
         }
+        else System.out.println("Invalid arguments");
     }
 }
