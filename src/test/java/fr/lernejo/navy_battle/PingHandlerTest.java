@@ -1,5 +1,6 @@
 package fr.lernejo.navy_battle;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class PingHandlerTest {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:7777/ping")).GET().build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        assertEquals("OK", response.body());
-        assertEquals(200, response.statusCode());
+        Assertions.assertThat(response.statusCode()).isEqualTo(200);
+        Assertions.assertThat(response.body()).isEqualTo("OK");
     }
 }
