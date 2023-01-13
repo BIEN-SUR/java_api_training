@@ -14,6 +14,7 @@ public class Client {
             .setHeader("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString("{\"id\":\"1\", \"url\":\"http://localhost:" + port + "\", \"message\":\"" + message + "\"}")).build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.statusCode());
         //System.out.println("Status code: " + response.statusCode());
         //System.out.println("Response body: " + response.body());
     }
