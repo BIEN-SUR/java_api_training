@@ -13,10 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PingHandlerTest {
     @Test
-    public void PingTest () throws IOException, InterruptedException {
-        Server.start(7777);
+    public void PingTest() throws IOException, InterruptedException {
+        Server.start(98);
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:7777/ping")).GET().build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:98/ping")).GET().build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        Assertions.assertThat(response.statusCode()).isEqualTo(200);
+        Assertions.assertThat(response.body()).isEqualTo("OK");
+    }
+
+    @Test
+    public void pingTest2() throws Exception {
+        Launcher.main(new String[]{"36"});
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:36/ping")).GET().build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Assertions.assertThat(response.statusCode()).isEqualTo(200);
         Assertions.assertThat(response.body()).isEqualTo("OK");
