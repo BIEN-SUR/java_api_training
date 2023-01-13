@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class StartHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
+        if (!exchange.getRequestMethod().equals("POST")) { exchange.sendResponseHeaders(404, -1); return;}
+        try { BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
             String requestBody = reader.lines().collect(Collectors.joining()); reader.close();
             JSONObject json = new JSONObject(requestBody);
             JSONObject responseJson = new JSONObject();

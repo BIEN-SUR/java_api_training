@@ -16,7 +16,6 @@ public class Client {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         //System.out.println("Status code: " + response.statusCode());
         //System.out.println("Response body: " + response.body());
-
     }
 
 }

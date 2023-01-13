@@ -15,5 +15,4 @@ public class PingHandler implements HttpHandler {
             os.write(response.getBytes());
         }
     }
-
 }
