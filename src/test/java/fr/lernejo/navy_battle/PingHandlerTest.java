@@ -15,11 +15,9 @@ public class PingHandlerTest {
     public void PingTest () throws IOException, InterruptedException {
         Server.start(7777);
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:7777/ping")).GET().build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:7777/ping")).GET().build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         assertEquals("OK", response.body());
         assertEquals(200, response.statusCode());
     }
-
 }
